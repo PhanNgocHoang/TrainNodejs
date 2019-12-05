@@ -11,6 +11,7 @@ router.get('/admin/dashboard', admin.dashboard)
 
 router.get('/user/listUser', user.listUser)
 router.get('/user/addUser', user.addUser)
+router.post('/user/addUser', user.postAddUser)
 router.get('/user/editUser', user.editUser)
 router.get('/user/deleteUser', user.deleteUser)
 

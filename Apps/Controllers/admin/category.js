@@ -1,5 +1,6 @@
 const CategoryModel = require('../../Models/admin/category.model')
 const productModel = require('../../Models/admin/product.model')
+const mongoose = require('../../../common/database')()
 async function listCategory (req, res) {
     let category = await CategoryModel.CategoryModel.find().populate('category_product')
     var lsCategory = JSON.parse(JSON.stringify(category))
@@ -10,29 +11,36 @@ function addCategory(req, res)
 {
     res.render('admin/add_category', {data:{}})
 }
-function postAddCategory(req, res)
+async function postAddCategory(req, res)
 {
     let name = req.body.cat_name
-    console.log(name)
-    CategoryModel.CategoryModel.find({cat_name:name}, (docs)=>{
-        console.log(docs)
-        if(docs == null)
-        {
-            category =  new CategoryModel.CategoryModel({
-                cat_name: name
-            })
-            category.save((err, cat)=>{
-                if(err){console.log('Fail', err)}
-                else{console.log('add category success')}
-            })
-        }
-        else
-        {
-            let error = "Danh mục đã tồn tại !"
-            res.render('admin/add_category', {data:{error:error}})
-        }
-    })
-    
+    let catName = await CategoryModel.CategoryModel.find({cat_name: name})
+    if(catName == 0)
+    {
+        newCategory = new CategoryModel.CategoryModel({cat_name:name})
+        newCategory.save((err)=>{
+            if(err){res.render('admin/add_category', {data:{}})}
+            else{res.redirect('/category/listCategory')}
+        })
+    }
+    else
+    {
+        error = "Danh Mục Đã Tồn Tại !"
+        res.render('admin/add_category', {data:{error:error}})
+    }
+    // try{
+    // catName = await CategoryModel.CategoryModel1.find({cat_name:name})
+    // if(catName == 0)
+    // {
+    // newCategory = await new CategoryModel.CategoryModel1({cat_name:name})
+    // }
+    // }
+    // finally{
+    //     newCategory.save((err)=>{
+    //         if(err){console.log(err)}
+    //         else(console.log('Thanh cong'))
+    //     })
+    // }
 }
 function editCategory (req, res)
 {

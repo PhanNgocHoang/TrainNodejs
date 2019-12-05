@@ -1,7 +1,7 @@
 const  CategoryModel = require('../../Models/admin/category.model')
 const mongoose = require('../../../common/database')()
 const schemaProduct = new mongoose.Schema({
-    // _id: mongoose.Schema.ObjectId,
+    _id: {type:mongoose.Schema.ObjectId, auto: true},
     cat_id:mongoose.Schema.Types.ObjectId,
     prd_name: String,
     prd_image: String,

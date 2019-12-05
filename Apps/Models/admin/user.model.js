@@ -4,7 +4,7 @@ const mongoose = require('../../../common/database')()
 const schemaUser =  new mongoose.Schema(
 {
     //_id la kieu du lieu dac biet phair lay ra tu doi tuong mongoose
-    _id:mongoose.Schema.ObjectId,
+    _id:{type:mongoose.Schema.ObjectId, auto:true},
     user_full:String,
     user_mail:String,
     user_pass:String,

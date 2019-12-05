@@ -3,7 +3,8 @@ const productModel = require('../../Models/admin/product.model')
 const schemaCategory = new mongoose.Schema({
     _id :{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
+        ref: 'Product',
+        auto: true
     },
     cat_name: String,
 },)
@@ -33,4 +34,5 @@ const CategoryModel = mongoose.model("Category", schemaCategory, "Category")
 // })
 module.exports = {
     CategoryModel: CategoryModel
+
 }

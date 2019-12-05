@@ -16,36 +16,26 @@ function getAdd(req, res){
         res.render('admin/add_product', {data:{category:docs}})
     })
 }
-function postAdd(req, res){
+async function postAdd(req, res){
     let name = req.body.prd_name
-    let price = req.body.prd_price
-    let warranty = req.body.prd_warranty
-    let accessories = req.body.prd_accessories
-    let promotion = req.body.prd_promotion
-    let prNew = req.body.prd_new
-    let img = req.body.prd_image
-    let cat = req.body.cat_id
-    let status = req.body.prd_status
-    let featured = req.body.prd_featured
-    let description = req.body.prd_details
     console.log('namepr is: ', name)
-    var addPr = new ProductModel.ProductModel({
-        prd_name: name,
-        cat_id: cat,
-        prd_price: price,
-        prd_warranty: warranty,
-        prd_accessories: accessories,
-        prd_promotion: promotion,
-        prd_new: prNew,
-        prd_image: img,
-        prd_status: status,
-        prd_featured: featured,
-        prd_details: description,
-    })
-    addPr.save((err)=>{
-        if(err){console.log(err)}
-        else{res.redirect('')}
-    })
+    // var addPr = await new ProductModel.ProductModel({
+    //     prd_name: name,
+    //     cat_id: cat,
+    //     prd_price: price,
+    //     prd_warranty: warranty,
+    //     prd_accessories: accessories,
+    //     prd_promotion: promotion,
+    //     prd_new: prNew,
+    //     prd_image: img,
+    //     prd_status: status,
+    //     prd_featured: featured,
+    //     prd_details: description,
+    // })
+    // addPr.save((err)=>{
+    //     if(err){console.log(err)}
+    //     else{res.redirect('')}
+    // })
 }
 function getEdit(req, res){
     res.render('admin/edit_product')
